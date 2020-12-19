@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+}
+h3{
+    font-size: 28px;
+}
+
+
+form{
+    padding-top: 20px;
+}
+
+  input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: blueviolet;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+ 
+  .col {
+   margin: 15% 30% 15% 30%;
+   box-shadow: 1px 1px 100px 1px #88888878;
+   padding: 10px;
+   border-radius: 10px;
+  }
+  
+  .psw {
+    float: right;
+  }
+  .container_2 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .container_2 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
+    transition: 0.25s;
+  }
+  
+ 
+  .container_2 input:checked ~ .checkmark {
+    background-color: blueviolet;
+    transition: 0.25s;
+  }
+ 
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .container_2 input:checked ~ .checkmark:after {
+    display: block;
+    
+  }
+  
+  .container_2 .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  a{ 
+    text-decoration: none;
+    color: blueviolet;
+    font-family: 'Poppins', sans-serif;
+  
+}
+
+.sso {
+    margin: 0 auto;
+    width: 50%;
+}
+    
+  @media screen and (max-width: 300px) {
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .col {
+        margin: 15% 5% 15% 5%;
+    }
+    .sso {
+        width: 85%;
+    }
+  }
+
+
+@media only screen and (min-width: 600px) {
+    .col {
+        margin: 15% 30% 15% 30%;
+    }
+}
+
+
+@media (max-width:1024px) and (min-width:768px) {
+    .col {
+        margin: 30% 30% 15% 30%;
+    }
+
+    .sso {
+        width: 90%;
+    }
+}
+@media only screen and (min-width: 1200px) {
+  
+}
