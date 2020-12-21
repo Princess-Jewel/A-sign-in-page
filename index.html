@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
    
     <title>Sign In Page </title>
 </head>
@@ -20,25 +21,27 @@
                     <h3>
                         Sign in to your account
                     </h3>
-                        <form>
+                    <form method="post" autocomplete="off" name="google-sheet">
+                      <div class="form-group">
                             <div class="container">
                               <label for="email"><b>Email</b></label>
-                              <input type="email" name="email" required>
+                              <!-- <input type="email" name="email" required> -->
+                              <input type="text" name="Email" value="" required=""/>
                           
                               
                               <div>
                                 <label for="psw"><b>Password</b></label>
                                 <a class="psw" href="https://freecodecamp.com" rel="noreferrer noopener" target="_blank">Forgot password?</a>
                               </div>
-                              <input type="password"  name="psw" required>
+                              <input type="password"  name="psw" value="" required=""/>
                              
 
                               <label class="container_2">
                                 <input type="checkbox" checked="checked" name="remember"> Stay signed in for a week
                                 <span class="checkmark"></span>
                               </label>
-                    
-                              <button type="submit" formaction="https://freecodecamp.com">Continue</button>
+                    <!-- formaction="https://freecodecamp.com" -->
+                              <button type="submit" >Continue</button>
 
                             </div>
                             
@@ -51,11 +54,66 @@
                 </div>
             </div>
         </div>
-    
+  <!-- https://script.google.com/macros/s/AKfycbxq8dyXb9Fu_9MyYTH4pZt6qppglPAv6A17eJfLW1a4r0UT4YEbp5YEdA/exec -->
+        <script>
+          const scriptURL = 'https://script.google.com/macros/s/AKfycbw8fF3IotOUg-HxjQm-78ALgE3QulzAvkWkJFbTwel7EBx0ce7o/exec'
+          const form = document.forms['google-sheet']
+        
+          form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+              .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+              .catch(error => console.error('Error!', error.message))
+          })
+        </script>
 
+        <script>
+            
+       
+  var sheetName = 'Sheet1'
+  var scriptProp = PropertiesService.getScriptProperties()
 
+  function intialSetup () {
+    var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+    scriptProp.setProperty('key', activeSpreadsheet.getId())
+  }
 
+  function doPost (e) {
+    var lock = LockService.getScriptLock()
+    lock.tryLock(10000)
 
+    try {
+    var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    var sheet = doc.getSheetByName(sheetName)
+
+    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    var nextRow = sheet.getLastRow() + 1
+
+    var newRow = headers.map(function(header) {
+      return header === 'timestamp' ? new Date() : e.parameter[header]
+    })
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+    }
+
+    catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+    }
+
+    finally {
+    lock.releaseLock()
+    }
+  }
+        </script>
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
 </html>
